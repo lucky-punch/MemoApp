@@ -8,13 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        textView.delegate = self
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        textView.text = appDelegate.lastText
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.lastText = textView.text
+    }
 
 }
 
